@@ -7,7 +7,8 @@ changing the colour of the NavBall text according to whether they are ascending 
 
 When you are trying to manually land and reducing velocity, often newer players can 'overburn' which results 
 in the speed switching to a positive figure (and the vessel lifts up again). Unfortunately, in stock, there is 
-no indication as to which direction the velocity is being applied. Additionally, if the player has the SAS set to 
+no indication as to which direction the velocity is being applied (other than the tiny VS dial at the top of the screen which 
+is difficult to see, inaccurate and in the wrong position). Additionally, if the player has the SAS set to 
 retrograde (as instructed in the tutorials), because the prograde/retrograde markers switch positions during such 
 an event, the vessel can sometimes turn upside down and/or spin which a newer player (and some more experienced!) can 
 struggle to recover from.
