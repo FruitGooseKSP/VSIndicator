@@ -13,7 +13,7 @@ retrograde (as instructed in the tutorials), because the prograde/retrograde mar
 an event, the vessel can sometimes turn upside down and/or spin which a newer player (and some more experienced!) can 
 struggle to recover from.
 
-This mod addresses the above by changing the colour of the text to red (when descending) and green (standard) when 
+This mod attempts to address the above by changing the colour of the text to red (when descending) and green (standard) when 
 ascending. Therefore, with practice, it's possible to manually land without locking the SAS to the retrograde marker. 
 Additionally, this teaches the player fine throttle control as they get instant feedback on their adjustments whilst 
 attempting to (for example) hover.
