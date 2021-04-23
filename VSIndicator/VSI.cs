@@ -1,5 +1,6 @@
 ﻿using KSP.UI.Screens.Flight;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,12 @@ namespace VSIndicator
     [KSPAddon(KSPAddon.Startup.Flight, false)]
     public class VSI : MonoBehaviour
     {
+        [KSPField(isPersistant = true)]
+        public Color32 savedA = Color.green;
+
+        [KSPField(isPersistant = true)]
+        public Color32 savedD = new Color32(255, 0, 0, 255);
+
         // The speed display component on the navball
         public SpeedDisplay sD;
 
@@ -23,19 +30,66 @@ namespace VSIndicator
         // bool to switch colour
         public bool colourSet = false;
 
-        // the colour we switch to
-        public Color32 redColour = new Color32();
-        
+        public VSIOptions vSIOptions;
+
+        public static bool shouldHideButton;
+
+        public bool testDone = true;
+
+        public static VSI Instance;
+
+        public Color32 aColour = Color.green;
+        public Color32 dColour = new Color32(255, 0, 0, 255);
+
+
+        public static void SetBaseColours(Color32 _aColour, Color32 _dColour)
+        {
+            Instance.savedA = _aColour;
+            Instance.savedD = _dColour;
+        }
+
+
+        public static void TestSwatch(Color32 swatch)
+        {
+            Color32 current1 = Instance.tM.color;
+            Color32 current2 = Instance.tM2.color;
+            
+            Instance.tM.color = swatch;
+            Instance.tM2.color = swatch;
+            Instance.tM.ForceMeshUpdate();
+            Instance.tM2.ForceMeshUpdate();
+           
+            StaticCoroutine.Start(Wait(5));
+
+          
+                
+            
+
+        }
+
+        public static IEnumerator Wait(float seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+            Instance.tM.color = Instance.savedA;
+            Instance.tM2.color = Instance.savedA;
+            Instance.tM.ForceMeshUpdate();
+            Instance.tM2.ForceMeshUpdate();
+        }
+
+
+
 
         public void Start()
         {
             if (HighLogic.LoadedSceneIsFlight)
             {
-                
+                Instance = this;
                 sD = KSP.UI.Screens.Flight.SpeedDisplay.Instance;
                 tM = sD.textSpeed;
                 tM2 = sD.textTitle;
-                redColour = new Color32(255, 48, 48, 255);      // Color.red would probably work in hindsight
+
+                vSIOptions = HighLogic.CurrentGame.Parameters.CustomParams<VSIOptions>();
+                shouldHideButton = vSIOptions.disableButton;
 
             }
 
@@ -45,17 +99,26 @@ namespace VSIndicator
         {
             if (!colourSet)
             {
-                tM.color = Color.green;
-                tM2.color = Color.green;
-                tM.ForceMeshUpdate();
+                if (tM.color != savedA)
+                {
+                    tM.color = savedA;
+                    tM2.color = savedA;
+                    tM.ForceMeshUpdate();
+                    tM2.ForceMeshUpdate();
+                }
+
             }
             else
             {
+                if (tM.color != savedD)
+                {
+                    tM.color = savedD;
+                    tM2.color = savedD;
+                    tM.ForceMeshUpdate();
+                    tM2.ForceMeshUpdate();
+                }
+                else return;
 
-                tM.color = redColour;
-                tM2.color = redColour;
-                tM.ForceMeshUpdate();
-                
             }
         }
 
@@ -65,7 +128,7 @@ namespace VSIndicator
 
             if (HighLogic.LoadedSceneIsFlight && !FlightGlobals.ActiveVessel.Landed && tM2.text == "Surface")
             {
-                double verticalSpeed = FlightGlobals.ActiveVessel.verticalSpeed;    // get vessel vertical speed
+                double verticalSpeed = FlightGlobals.ActiveVessel.verticalSpeed;   
 
                 if (verticalSpeed < 0)              // if negative (ie falling)
                 {
