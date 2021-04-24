@@ -28,7 +28,7 @@ namespace VSIndicator
         public static bool closeBtn;
 
         // menu position reference ie in the middle of the screen
-        private Vector2 menuPR = new Vector2((Screen.width / 2) - 130, (Screen.height / 2) - 220);
+        private Vector2 menuPR = new Vector2((Screen.width / 2) - 130, (Screen.height / 2) - 260);
 
         // menu size reference
         private Vector2 menuSR = new Vector2(260, 440);
@@ -84,10 +84,15 @@ namespace VSIndicator
 
         private static void ItsVSITime()
         {
-              guiPos = GUILayout.Window(123457, guiPos, MenuWindow,
-                      "Select Colour Preferences", new GUIStyle(HighLogic.Skin.window));
+            //   guiPos = GUILayout.Window(123457, guiPos, MenuWindow,
+            //        "Select Colour Preferences", new GUIStyle(HighLogic.Skin.window));
 
-       //     MenuWindow(1234567);
+
+            // MenuWindow(1234567);
+
+            guiPos = GUI.Window(123457, guiPos, MenuWindow,
+                "Select Colour Preferences", new GUIStyle(HighLogic.Skin.window));
+
             vSIBtn.SetTrue();
 
             btnIsPresent = true;
@@ -106,202 +111,70 @@ namespace VSIndicator
             // the menu
 
 
-            GUILayout.BeginArea(new Rect(Screen.width / 2 - 130, Screen.height / 2 - 220, 260, 440), GUIContent.none, new GUIStyle(HighLogic.Skin.box));
-            GUILayout.BeginVertical();
-            GUILayout.BeginHorizontal();
 
-            GUILayout.Label("Colour", new GUIStyle(HighLogic.Skin.label));
-            GUILayout.Label("Ascending", new GUIStyle(HighLogic.Skin.label));
-            GUILayout.Label("Descending", new GUIStyle(HighLogic.Skin.label));
 
-            GUILayout.EndHorizontal();
-            GUILayout.EndVertical();
-            GUILayout.BeginVertical();
-            GUILayout.BeginHorizontal();
-
-            GUILayout.Label("Green (Stock)", new GUIStyle(HighLogic.Skin.label));
-            GUILayout.Toggle(true, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-            GUILayout.Toggle(false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-
-            GUILayout.EndHorizontal();
-            GUILayout.EndVertical();
-            GUILayout.BeginVertical();
-            GUILayout.BeginHorizontal();
-
-            GUILayout.Label("Red", new GUIStyle(HighLogic.Skin.label));
-            GUILayout.Toggle(true, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-            GUILayout.Toggle(false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-
-            GUILayout.EndHorizontal();
-            GUILayout.EndVertical();
-            GUILayout.BeginVertical();
-            GUILayout.BeginHorizontal();
-
-            GUILayout.Label("Orange", new GUIStyle(HighLogic.Skin.label));
-            GUILayout.Toggle(true, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-            GUILayout.Toggle(false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-
-            GUILayout.EndHorizontal();
-            GUILayout.EndVertical();
-            GUILayout.BeginVertical();
-            GUILayout.BeginHorizontal();
-
-            GUILayout.Label("Yellow", new GUIStyle(HighLogic.Skin.label));
-            GUILayout.Toggle(true, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-            GUILayout.Toggle(false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-
-            GUILayout.EndHorizontal();
-            GUILayout.EndVertical();
-            GUILayout.BeginVertical();
-            GUILayout.BeginHorizontal();
-
-            GUILayout.Label("Cyan", new GUIStyle(HighLogic.Skin.label));
-            GUILayout.Toggle(true, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-            GUILayout.Toggle(false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-
-            GUILayout.EndHorizontal();
-            GUILayout.EndVertical();
-            GUILayout.BeginVertical();
-            GUILayout.BeginHorizontal();
-
-            GUILayout.Label("Blue", new GUIStyle(HighLogic.Skin.label));
-            GUILayout.Toggle(true, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-            GUILayout.Toggle(false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-
-            GUILayout.EndHorizontal();
-            GUILayout.EndVertical();
-            GUILayout.BeginVertical();
-            GUILayout.BeginHorizontal();
-
-            GUILayout.Label("Magenta", new GUIStyle(HighLogic.Skin.label));
-            GUILayout.Toggle(true, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-            GUILayout.Toggle(false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-
-            GUILayout.EndHorizontal();
-            GUILayout.EndVertical();
-            GUILayout.BeginVertical();
-            GUILayout.BeginHorizontal();
-
-            GUILayout.Label("Pink", new GUIStyle(HighLogic.Skin.label));
-            GUILayout.Toggle(true, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-            GUILayout.Toggle(false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-
-            GUILayout.EndHorizontal();
-            GUILayout.EndVertical();
-            GUILayout.BeginVertical();
-            GUILayout.BeginHorizontal();
-
-            GUILayout.Label("White", new GUIStyle(HighLogic.Skin.label));
-            GUILayout.Toggle(true, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-            GUILayout.Toggle(false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-
-            GUILayout.EndHorizontal();
-            GUILayout.EndVertical();
-            GUILayout.BeginVertical();
-            GUILayout.BeginHorizontal();
-
-            GUILayout.Button("Close", new GUIStyle(HighLogic.Skin.button), GUILayout.Width(130));
-
-            GUILayout.EndHorizontal();
-            GUILayout.EndVertical();
 
             GUI.DragWindow();
 
-            GUILayout.EndArea();
+           
+            GUI.BeginGroup(new Rect(0,0, 260, 440));
 
-            /*   GUI.BeginGroup(new Rect(Screen.width / 2 - 130, Screen.height / 2 - 270, 260, 440));
+            
+            GUI.Box(new Rect(0, 0, 260, 440), GUIContent.none);
 
-               GUI.Box(new Rect(0, 0, 260, 440), "Select Your Colour Preferences");
+            GUI.Button(new Rect(240, 0, 20, 20), "X", new GUIStyle(HighLogic.Skin.button));
 
-               GUI.Label(new Rect(20, 40, 80, 20), "Colour");
-               GUI.Label(new Rect(100, 40, 80, 20), "Ascending");
-               GUI.Label(new Rect(180, 40, 80, 20), "Descending");
+            GUI.Label(new Rect(20, 40, 80, 20), "Colour", new GUIStyle(HighLogic.Skin.label));
+            GUI.Label(new Rect(100, 40, 80, 20), "Ascending", new GUIStyle(HighLogic.Skin.label));
+            GUI.Label(new Rect(180, 40, 80, 20), "Descending", new GUIStyle(HighLogic.Skin.label));
 
-               GUI.Label(new Rect(20, 80, 80, 20), "Green (Stock)");
-               GUI.Toggle(new Rect(110, 80, 80, 20), 1, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-               GUI.Toggle(new Rect(190, 80, 80, 20), 2, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+            GUI.Label(new Rect(20, 80, 80, 20), "Green (Stock)");
+            GUI.Toggle(new Rect(110, 78, 80, 20), 1, true, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+            GUI.Toggle(new Rect(192, 78, 80, 20), 2, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
 
-               GUI.Label(new Rect(20, 120, 80, 20), "Red");
-               GUI.Toggle(new Rect(110, 120, 80, 20), 3, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-               GUI.Toggle(new Rect(190, 120, 80, 20), 4, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+            GUI.Label(new Rect(20, 120, 80, 20), "Red");
+            GUI.Toggle(new Rect(110, 118, 80, 20), 3, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+            GUI.Toggle(new Rect(192, 118, 80, 20), 4, true, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
 
-               GUI.Label(new Rect(20, 160, 80, 20), "Orange");
-               GUI.Toggle(new Rect(110, 160, 80, 20), 5, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-               GUI.Toggle(new Rect(190, 160, 80, 20), 6, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+            GUI.Label(new Rect(20, 160, 80, 20), "Orange");
+            GUI.Toggle(new Rect(110, 158, 80, 20), 5, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+            GUI.Toggle(new Rect(192, 158, 80, 20), 6, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
 
-               GUI.Label(new Rect(20, 200, 80, 20), "Yellow");
-               GUI.Toggle(new Rect(110, 200, 80, 20), 7, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-               GUI.Toggle(new Rect(190, 200, 80, 20), 8, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+            GUI.Label(new Rect(20, 200, 80, 20), "Yellow");
+            GUI.Toggle(new Rect(110, 198, 80, 20), 7, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+            GUI.Toggle(new Rect(192, 198, 80, 20), 8, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
 
-               GUI.Label(new Rect(20, 240, 80, 20), "Cyan");
-               GUI.Toggle(new Rect(110, 240, 80, 20), 9, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-               GUI.Toggle(new Rect(190, 240, 80, 20), 10, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+            GUI.Label(new Rect(20, 240, 80, 20), "Cyan");
+            GUI.Toggle(new Rect(110, 238, 80, 20), 9, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+            GUI.Toggle(new Rect(192, 238, 80, 20), 10, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
 
-               GUI.Label(new Rect(20, 280, 80, 20), "Blue");
-               GUI.Toggle(new Rect(110, 280, 80, 20), 11, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-               GUI.Toggle(new Rect(190, 280, 80, 20), 12, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+            GUI.Label(new Rect(20, 280, 80, 20), "Blue");
+            GUI.Toggle(new Rect(110, 278, 80, 20), 11, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+            GUI.Toggle(new Rect(192, 278, 80, 20), 12, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
 
-               GUI.Label(new Rect(20, 320, 80, 20), "Magenta");
-               GUI.Toggle(new Rect(110, 320, 80, 20), 13, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-               GUI.Toggle(new Rect(190, 320, 80, 20), 14, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+            GUI.Label(new Rect(20, 320, 80, 20), "Magenta");
+            GUI.Toggle(new Rect(110, 318, 80, 20), 13, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+            GUI.Toggle(new Rect(192, 318, 80, 20), 14, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
 
-               GUI.Label(new Rect(20, 360, 80, 20), "Pink");
-               GUI.Toggle(new Rect(110, 360, 80, 20), 15, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-               GUI.Toggle(new Rect(190, 360, 80, 20), 16, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+            GUI.Label(new Rect(20, 360, 80, 20), "Pink");
+            GUI.Toggle(new Rect(110, 358, 80, 20), 15, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+            GUI.Toggle(new Rect(192, 358, 80, 20), 16, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
 
-               GUI.Label(new Rect(20, 400, 80, 20), "White");
-               GUI.Toggle(new Rect(110, 400, 80, 20), 17, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-               GUI.Toggle(new Rect(190, 400, 80, 20), 18, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-
-
-
-
+            GUI.Label(new Rect(20, 400, 80, 20), "White");
+            GUI.Toggle(new Rect(110, 398, 80, 20), 17, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+            GUI.Toggle(new Rect(192, 398, 80, 20), 18, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
 
 
 
-               GUI.EndGroup();
-           */
 
 
-            /* GUILayout.BeginVertical();
-             GUILayout.Space(20);
-
-             GUILayout.BeginArea(new Rect(20, 40, 360, 400));
-
-             GUILayout.BeginHorizontal();
-             GUILayout.Space(20);
-             GUILayout.Label("Select Ascending Colour", new GUIStyle(HighLogic.Skin.label));
-             GUILayout.Space(20);
-             GUILayout.EndHorizontal();
-
-             GUILayout.BeginHorizontal();
-             GUILayout.Space(20);
-             selection = GUI.SelectionGrid(new Rect(20, 100, 360, 300), selection, selString1, 2, new GUIStyle(HighLogic.Skin.toggle));
-             GUILayout.Space(20);
-             GUILayout.EndHorizontal();
-
-             GUILayout.EndArea();
-
-             GUILayout.BeginArea(new Rect(20, 440, 360, 400));
-
-             GUILayout.BeginHorizontal();
-             GUILayout.Space(20);
-             GUILayout.Label("Select Descending Colour", new GUIStyle(HighLogic.Skin.label));
-             GUILayout.Space(20);
-             GUILayout.EndHorizontal();
-
-             GUILayout.BeginHorizontal();
-             GUILayout.Space(20);
-             selection2 = GUI.SelectionGrid(new Rect(20, 500, 360, 800), selection, selString2, 2, new GUIStyle(HighLogic.Skin.toggle));
-             GUILayout.Space(20);
-             GUILayout.EndHorizontal();
 
 
-             GUILayout.EndArea();
+            GUI.EndGroup();
+           
+           
 
 
-             GUILayout.EndVertical();
-            */
 
 
         }
