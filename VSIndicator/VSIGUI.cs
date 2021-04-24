@@ -25,6 +25,7 @@ namespace VSIndicator
         // this
         public static VSIGUI instance;
 
+        // menu close button
         public static bool closeBtn;
 
         // menu position reference ie in the middle of the screen
@@ -39,56 +40,32 @@ namespace VSIndicator
         public static int selection = 1;
         public static int selection2 = 1;
 
-        public static int colorCode1;
-        public static int colorCode2;
-
-        public static string[] selString1 = new string[]
-        {
-            "Green (Stock)",
-            "Red",
-            "Orange",
-            "Yellow",
-            "Cyan",
-            "Blue",
-            "Magenta",
-            "Pink",
-            "White",
-        };
-
-        public static string[] selString2 = new string[]
-        {
-            "Green (Stock)",
-            "Red",
-            "Orange",
-            "Yellow",
-            "Cyan",
-            "Blue",
-            "Magenta",
-            "Pink",
-            "White",
-        };
-
         public static string currentDCol = "Red";
         public static string currentACol = "Green (Stock)";
 
         public static Color32 dCol = new Color32(255, 0, 0, 255);
         public static Color32 aCol = Color.green;
+
+        public static int selA;
+        public static int selD;
+
+        public static string[] bS =
+        {
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+        };
         
-
-
-
-
-
-
 
 
         private static void ItsVSITime()
         {
-            //   guiPos = GUILayout.Window(123457, guiPos, MenuWindow,
-            //        "Select Colour Preferences", new GUIStyle(HighLogic.Skin.window));
-
-
-            // MenuWindow(1234567);
 
             guiPos = GUI.Window(123457, guiPos, MenuWindow,
                 "Select Colour Preferences", new GUIStyle(HighLogic.Skin.window));
@@ -114,7 +91,7 @@ namespace VSIndicator
 
 
 
-            GUI.DragWindow();
+            
 
            
             GUI.BeginGroup(new Rect(0,0, 260, 440));
@@ -122,57 +99,49 @@ namespace VSIndicator
             
             GUI.Box(new Rect(0, 0, 260, 440), GUIContent.none);
 
-            GUI.Button(new Rect(240, 0, 20, 20), "X", new GUIStyle(HighLogic.Skin.button));
+            closeBtn = GUI.Button(new Rect(240, 0, 20, 20), "X", new GUIStyle(HighLogic.Skin.button));
 
             GUI.Label(new Rect(20, 40, 80, 20), "Colour", new GUIStyle(HighLogic.Skin.label));
             GUI.Label(new Rect(100, 40, 80, 20), "Ascending", new GUIStyle(HighLogic.Skin.label));
             GUI.Label(new Rect(180, 40, 80, 20), "Descending", new GUIStyle(HighLogic.Skin.label));
 
             GUI.Label(new Rect(20, 80, 80, 20), "Green (Stock)");
-            GUI.Toggle(new Rect(110, 78, 80, 20), 1, true, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-            GUI.Toggle(new Rect(192, 78, 80, 20), 2, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+           
 
             GUI.Label(new Rect(20, 120, 80, 20), "Red");
-            GUI.Toggle(new Rect(110, 118, 80, 20), 3, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-            GUI.Toggle(new Rect(192, 118, 80, 20), 4, true, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+         
 
             GUI.Label(new Rect(20, 160, 80, 20), "Orange");
-            GUI.Toggle(new Rect(110, 158, 80, 20), 5, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-            GUI.Toggle(new Rect(192, 158, 80, 20), 6, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+          
 
             GUI.Label(new Rect(20, 200, 80, 20), "Yellow");
-            GUI.Toggle(new Rect(110, 198, 80, 20), 7, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-            GUI.Toggle(new Rect(192, 198, 80, 20), 8, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+          
 
             GUI.Label(new Rect(20, 240, 80, 20), "Cyan");
-            GUI.Toggle(new Rect(110, 238, 80, 20), 9, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-            GUI.Toggle(new Rect(192, 238, 80, 20), 10, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+           
 
             GUI.Label(new Rect(20, 280, 80, 20), "Blue");
-            GUI.Toggle(new Rect(110, 278, 80, 20), 11, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-            GUI.Toggle(new Rect(192, 278, 80, 20), 12, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+           
 
             GUI.Label(new Rect(20, 320, 80, 20), "Magenta");
-            GUI.Toggle(new Rect(110, 318, 80, 20), 13, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-            GUI.Toggle(new Rect(192, 318, 80, 20), 14, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+            
 
             GUI.Label(new Rect(20, 360, 80, 20), "Pink");
-            GUI.Toggle(new Rect(110, 358, 80, 20), 15, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-            GUI.Toggle(new Rect(192, 358, 80, 20), 16, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
+            
 
             GUI.Label(new Rect(20, 400, 80, 20), "White");
-            GUI.Toggle(new Rect(110, 398, 80, 20), 17, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
-            GUI.Toggle(new Rect(192, 398, 80, 20), 18, false, GUIContent.none, new GUIStyle(HighLogic.Skin.toggle));
 
 
+            selA = GUI.SelectionGrid(new Rect(110, 78, 80, 20), selA, bS, 1, new GUIStyle(HighLogic.Skin.toggle));
+            selD = GUI.SelectionGrid(new Rect(192, 78, 80, 20), selD, bS, 1, new GUIStyle(HighLogic.Skin.toggle));
 
-
+            GUI.DragWindow();
 
 
 
             GUI.EndGroup();
-           
-           
+
+            
 
 
 
@@ -182,19 +151,22 @@ namespace VSIndicator
 
         public void PerformColourTest(int type)
         {
-            Color32 testColour = Color.green;
+     //       int testColour;
 
-            switch (type)
+      /*      switch (type)
             {
                 case 0:
-                    testColour = aCol;
+                    testColour = storedBoolA;
                     break;
                 case 1:
-                    testColour = dCol;
+                    testColour = storedBoolD;
+                    break;
+                default:
+                    testColour = -1;
                     break;
             }
-
-            VSI.TestSwatch(testColour);
+      */
+      //      VSI.TestSwatch(testColour);
 
 
         }
@@ -231,7 +203,14 @@ namespace VSIndicator
 
         }
 
+        public void QryMultiPress()
+        {
+            
 
+            
+
+
+        }
 
 
         public void Start()
@@ -253,7 +232,9 @@ namespace VSIndicator
                 vSITextureOn = GameDatabase.Instance.GetTexture("FruitKocktail/GRAPES/Icons/grapeson", false);
                 guiPos = new Rect(menuPR, menuSR);
 
+
                 GameEvents.OnGameSettingsApplied.Add(TrialButton);
+                
 
                 if (!VSI.shouldHideButton)
                 {
@@ -307,23 +288,10 @@ namespace VSIndicator
 
                     else if (btnIsPresent)
                     {
-                        if (colorCode1 != selection)
-                        {
-                            colorCode1 = selection;
-                            ColourDecoder cD = new ColourDecoder();
-                            currentACol = cD.DecipherCode(selection);
-                            aCol = cD.GetColour(currentACol);
-                            PerformColourTest(0);
-                        }
+                       // QryMultiPress();
 
-                        if (colorCode2 != selection2)
-                        {
-                            colorCode2 = selection2;
-                            ColourDecoder cD2 = new ColourDecoder();
-                            currentDCol = cD2.DecipherCode(selection2);
-                            dCol = cD2.GetColour(currentDCol);
-                            PerformColourTest(1);
-                        }
+                       
+
 
 
                     }
@@ -365,6 +333,7 @@ namespace VSIndicator
             // ie when clicked on
             btnIsPressed = true;
             vSIBtn.SetTexture(vSITextureOn);
+
             
         }
 

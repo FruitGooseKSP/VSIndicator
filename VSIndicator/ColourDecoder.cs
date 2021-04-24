@@ -42,6 +42,8 @@ namespace VSIndicator
         {
             switch (code)
             {
+                case 0:
+                    return "Green (Stock)";
                 case 1:
                     return "Red";
                 case 2:

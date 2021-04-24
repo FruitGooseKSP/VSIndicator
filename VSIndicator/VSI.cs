@@ -49,17 +49,24 @@ namespace VSIndicator
         }
 
 
-        public static void TestSwatch(Color32 swatch)
+        public static void TestSwatch(int colourCode)
         {
             Color32 current1 = Instance.tM.color;
             Color32 current2 = Instance.tM2.color;
-            
+            Color32 swatch;
+            string codeName;
+            ColourDecoder cD = new ColourDecoder();
+            codeName = cD.DecipherCode(colourCode);
+            swatch = cD.GetColour(codeName);
+
+            Instance.testDone = false;
+
             Instance.tM.color = swatch;
             Instance.tM2.color = swatch;
             Instance.tM.ForceMeshUpdate();
             Instance.tM2.ForceMeshUpdate();
            
-            StaticCoroutine.Start(Wait(5));
+            StaticCoroutine.Start(Wait(3));
 
           
                 
@@ -74,6 +81,7 @@ namespace VSIndicator
             Instance.tM2.color = Instance.savedA;
             Instance.tM.ForceMeshUpdate();
             Instance.tM2.ForceMeshUpdate();
+            Instance.testDone = true;
         }
 
 
@@ -97,7 +105,7 @@ namespace VSIndicator
 
         public void Update()
         {
-            if (!colourSet)
+            if (!colourSet && testDone)
             {
                 if (tM.color != savedA)
                 {
