@@ -55,7 +55,7 @@ namespace VSIndicator
                 case 5:
                     return "Blue";
                 case 6:
-                    return "Cerise";
+                    return "Magenta";
                 case 7:
                     return "Pink";
                 case 8:
@@ -96,6 +96,43 @@ namespace VSIndicator
                 default:
                     return Color.green;
             }
+
+
+        }
+
+        public int GetReversedColour(string colour)
+        {
+            switch (colour)
+            {
+                case "Color.red":
+                    return 1;
+                case "Color.green":
+                    return 0;
+                case "RGBA(255, 0, 0, 255)":
+                    return 1;
+                case "RGBA(0, 255, 0, 255)":
+                    return 0;
+                case "RGBA(255, 128, 0, 255)":
+                    return 2;
+                case "RGBA(255, 255, 0, 255)":
+                    return 3;
+                case "RGBA(0, 255, 255, 255)":
+                    return 4;
+                case "RGBA(0, 128, 255, 255)":
+                    return 5;
+                case "RGBA(255, 0, 255, 255)":
+                    return 6;
+                case "RGBA(255, 0, 127, 255)":
+                    return 7;
+                case "RGBA(255, 255, 255, 255)":
+                    return 8;
+                default:
+                    return 0;
+            }
+                
+
+
+
 
 
         }

@@ -29,16 +29,13 @@ namespace VSIndicator
         public static bool closeBtn;
 
         // menu position reference ie in the middle of the screen
-        private Vector2 menuPR = new Vector2((Screen.width / 2) - 130, (Screen.height / 2) - 260);
+        private Vector2 menuPR = new Vector2((Screen.width / 2) - 155, (Screen.height / 2) - 230);
 
         // menu size reference
-        private Vector2 menuSR = new Vector2(260, 440);
+        private Vector2 menuSR = new Vector2(310, 420);
 
         // the menu position holder
         private static Rect guiPos;
-
-        public static int selection = 1;
-        public static int selection2 = 1;
 
         public static string currentDCol = "Red";
         public static string currentACol = "Green (Stock)";
@@ -48,19 +45,23 @@ namespace VSIndicator
 
         public static int selA;
         public static int selD;
+        public int storedA = 1;
+        public int storedD = 2;
 
-        public static string[] bS =
+        public static string[] cols =
         {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            "Green",
+            "Red",
+            "Orange",
+            "Yellow",
+            "Cyan",
+            "Blue",
+            "Magenta",
+            "Pink",
+            "White",
         };
+
+        
         
 
 
@@ -69,6 +70,8 @@ namespace VSIndicator
 
             guiPos = GUI.Window(123457, guiPos, MenuWindow,
                 "Select Colour Preferences", new GUIStyle(HighLogic.Skin.window));
+
+           
 
             vSIBtn.SetTrue();
 
@@ -88,60 +91,33 @@ namespace VSIndicator
             // the menu
 
 
+                  GUI.BeginGroup(new Rect(0,0, 310, 420));
+
+
+                  GUI.Box(new Rect(0, 0, 310, 420), GUIContent.none);
+
+
+                  GUI.Label(new Rect(40, 40, 140, 20), "Ascending", new GUIStyle(HighLogic.Skin.label));
+                  GUI.Label(new Rect(200, 40, 140, 20), "Descending", new GUIStyle(HighLogic.Skin.label));
+
+
+                  selA = GUI.SelectionGrid(new Rect(20, 78, 150, 420), selA, cols, 1, new GUIStyle(HighLogic.Skin.toggle));
+                  selD = GUI.SelectionGrid(new Rect(180, 78, 110, 420), selD, cols, 1, new GUIStyle(HighLogic.Skin.toggle));
+
+
+                  closeBtn = GUI.Button(new Rect(110, 375, 100, 25), "Close", new GUIStyle(HighLogic.Skin.button));
 
 
 
-            
-
-           
-            GUI.BeginGroup(new Rect(0,0, 260, 440));
-
-            
-            GUI.Box(new Rect(0, 0, 260, 440), GUIContent.none);
-
-            closeBtn = GUI.Button(new Rect(240, 0, 20, 20), "X", new GUIStyle(HighLogic.Skin.button));
-
-            GUI.Label(new Rect(20, 40, 80, 20), "Colour", new GUIStyle(HighLogic.Skin.label));
-            GUI.Label(new Rect(100, 40, 80, 20), "Ascending", new GUIStyle(HighLogic.Skin.label));
-            GUI.Label(new Rect(180, 40, 80, 20), "Descending", new GUIStyle(HighLogic.Skin.label));
-
-            GUI.Label(new Rect(20, 80, 80, 20), "Green (Stock)");
-           
-
-            GUI.Label(new Rect(20, 120, 80, 20), "Red");
-         
-
-            GUI.Label(new Rect(20, 160, 80, 20), "Orange");
-          
-
-            GUI.Label(new Rect(20, 200, 80, 20), "Yellow");
-          
-
-            GUI.Label(new Rect(20, 240, 80, 20), "Cyan");
-           
-
-            GUI.Label(new Rect(20, 280, 80, 20), "Blue");
-           
-
-            GUI.Label(new Rect(20, 320, 80, 20), "Magenta");
-            
-
-            GUI.Label(new Rect(20, 360, 80, 20), "Pink");
-            
-
-            GUI.Label(new Rect(20, 400, 80, 20), "White");
 
 
-            selA = GUI.SelectionGrid(new Rect(110, 78, 80, 20), selA, bS, 1, new GUIStyle(HighLogic.Skin.toggle));
-            selD = GUI.SelectionGrid(new Rect(192, 78, 80, 20), selD, bS, 1, new GUIStyle(HighLogic.Skin.toggle));
-
-            GUI.DragWindow();
+                  GUI.DragWindow();
 
 
 
-            GUI.EndGroup();
+                  GUI.EndGroup();
 
-            
+                  
 
 
 
@@ -151,22 +127,22 @@ namespace VSIndicator
 
         public void PerformColourTest(int type)
         {
-     //       int testColour;
+            int testColour;
 
-      /*      switch (type)
+            switch (type)
             {
                 case 0:
-                    testColour = storedBoolA;
+                    testColour = storedA;
                     break;
                 case 1:
-                    testColour = storedBoolD;
+                    testColour = storedD;
                     break;
                 default:
                     testColour = -1;
                     break;
             }
-      */
-      //      VSI.TestSwatch(testColour);
+      
+            VSI.TestSwatch(testColour, type);
 
 
         }
@@ -183,6 +159,7 @@ namespace VSIndicator
                     onDestroy();
                     vSIBtn = null;
                     btnIsPresent = false;
+                    GameEvents.OnGameSettingsApplied.Add(TrialButton);
                 }
             }
 
@@ -191,7 +168,7 @@ namespace VSIndicator
                 if (vSIBtn == null)
                 {
 
-                    GameEvents.OnGameSettingsApplied.Add(TrialButton);
+                    
 
                     vSIBtn = ApplicationLauncher.Instance.AddModApplication(onTrue, onFalse, onHover, onHoverOut, null, null,
                         ApplicationLauncher.AppScenes.FLIGHT, vSITextureOff);
@@ -203,9 +180,19 @@ namespace VSIndicator
 
         }
 
-        public void QryMultiPress()
+        public void SwitchChoice(int type)
         {
-            
+            if (type == 0)
+            {
+                storedA = selA;
+                PerformColourTest(0);
+            }
+
+            else
+            {
+                storedD = selD;
+                PerformColourTest(1);
+            }
 
             
 
@@ -228,10 +215,12 @@ namespace VSIndicator
                 }
 
 
-                vSITextureOff = GameDatabase.Instance.GetTexture("FruitKocktail/GRAPES/Icons/grapesoff", false);
-                vSITextureOn = GameDatabase.Instance.GetTexture("FruitKocktail/GRAPES/Icons/grapeson", false);
+                vSITextureOff = GameDatabase.Instance.GetTexture("FruitKocktail/VertikalSpeedIndicator/Icons/vsioff", false);
+                vSITextureOn = GameDatabase.Instance.GetTexture("FruitKocktail/VertikalSpeedIndicator/Icons/vsion", false);
                 guiPos = new Rect(menuPR, menuSR);
 
+                selA = VSI.GetColourCodeReversedA();
+                selD = VSI.GetColourCodeReversedD();
 
                 GameEvents.OnGameSettingsApplied.Add(TrialButton);
                 
@@ -288,7 +277,16 @@ namespace VSIndicator
 
                     else if (btnIsPresent)
                     {
-                       // QryMultiPress();
+                       if (selA != storedA)
+                       {
+                            SwitchChoice(0);
+                       }
+
+                       if (selD != storedD)
+                        {
+                            SwitchChoice(1);
+                        }
+
 
                        
 
@@ -331,8 +329,16 @@ namespace VSIndicator
         public void onTrue()
         {
             // ie when clicked on
-            btnIsPressed = true;
-            vSIBtn.SetTexture(vSITextureOn);
+            bool isSurface = VSI.GetTM2Text();
+
+            if (isSurface)
+            {
+                btnIsPressed = true;
+                vSIBtn.SetTexture(vSITextureOn);
+            }
+
+
+           
 
             
         }
@@ -342,7 +348,7 @@ namespace VSIndicator
             // ie when clicked off
             if (btnIsPressed)
             {
-                VSI.SetBaseColours(aCol, dCol);
+                //VSI.SetBaseColours(aCol, dCol);
                 vSIBtn.SetTexture(vSITextureOff);
                 btnIsPressed = false;
             }
