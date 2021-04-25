@@ -60,12 +60,14 @@ namespace VSIndicator
         public static int GetColourCodeReversedA()
         {
             ColourDecoder cD = new ColourDecoder();
-            return cD.GetReversedColour(Instance.vSIOptions.ascCol.ToString());
+            Color32 tempCol = cD.GetColour(Instance.vSIOptions.ascCol);
+            return cD.GetReversedColour(tempCol.ToString());
         }
         public static int GetColourCodeReversedD()
         {
             ColourDecoder cD = new ColourDecoder();
-            return cD.GetReversedColour(Instance.vSIOptions.desCol.ToString());
+            Color32 tempCol = cD.GetColour(Instance.vSIOptions.desCol);
+            return cD.GetReversedColour(tempCol.ToString());
         }
 
         // stores the selected colours
@@ -103,8 +105,9 @@ namespace VSIndicator
 
                 vSIOptions = HighLogic.CurrentGame.Parameters.CustomParams<VSIOptions>();
                 shouldHideButton = vSIOptions.disableButton;
-                savedA = vSIOptions.ascCol;
-                savedD = vSIOptions.desCol;
+                ColourDecoder cD = new ColourDecoder();
+                savedA = cD.GetColour(vSIOptions.ascCol);
+                savedD = cD.GetColour(vSIOptions.desCol);
 
             }
 
@@ -137,7 +140,9 @@ namespace VSIndicator
                         tM2.color = savedA;
                         tM.ForceMeshUpdate();
                         tM2.ForceMeshUpdate();
-                        vSIOptions.ascCol = savedA;
+                        ColourDecoder cD = new ColourDecoder();
+                        var tempCol = cD.GetReversedColour(savedA.ToString());
+                        vSIOptions.ascCol = cD.DecipherCode(tempCol);
 
                     }
 
@@ -152,7 +157,9 @@ namespace VSIndicator
                         tM2.color = savedD;
                         tM.ForceMeshUpdate();
                         tM2.ForceMeshUpdate();
-                        vSIOptions.desCol = savedD;
+                        ColourDecoder cD = new ColourDecoder();
+                        var tempCol = cD.GetReversedColour(savedD.ToString());
+                        vSIOptions.desCol = cD.DecipherCode(tempCol);
                     }
                     else return;
 

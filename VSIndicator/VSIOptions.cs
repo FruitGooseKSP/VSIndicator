@@ -20,13 +20,13 @@ namespace VSIndicator
         [GameParameters.CustomParameterUI("Disable Toolbar Button")]
         public bool disableButton = false;
 
-        // stores the preferred colour (not visible)
+        // stores the preferred colour 
         [GameParameters.CustomParameterUI("Saved Ascending Colour")]
-        public Color32 ascCol = Color.green;
+        public string ascCol = "Green";
 
-        // stores the preferred colour (not visible)
+        // stores the preferred colour 
         [GameParameters.CustomParameterUI("Saved Descending Colour")]
-        public Color32 desCol = Color.red;
+        public string desCol = "Red";
 
         public override void SetDifficultyPreset(GameParameters.Preset preset)
         {
