@@ -61,8 +61,8 @@ namespace VSIndicator
             "White",
         };
 
-        
-        
+
+
         // launch the menu
 
         private static void ItsVSITime()
@@ -71,7 +71,7 @@ namespace VSIndicator
             guiPos = GUI.Window(123457, guiPos, MenuWindow,
                 "Select Colour Preferences", new GUIStyle(HighLogic.Skin.window));
 
-           
+
 
             vSIBtn.SetTrue();
 
@@ -90,7 +90,7 @@ namespace VSIndicator
         {
             // the menu
 
-            GUI.BeginGroup(new Rect(0,0, 310, 420));
+            GUI.BeginGroup(new Rect(0, 0, 310, 420));
 
             GUI.Box(new Rect(0, 0, 310, 420), GUIContent.none);
 
@@ -125,7 +125,7 @@ namespace VSIndicator
                     testColour = -1;
                     break;
             }
-      
+
             VSI.TestSwatch(testColour, type);
 
 
@@ -150,7 +150,7 @@ namespace VSIndicator
             else
             {
                 if (vSIBtn == null)
-                {             
+                {
                     vSIBtn = ApplicationLauncher.Instance.AddModApplication(onTrue, onFalse, onHover, onHoverOut, null, null,
                         ApplicationLauncher.AppScenes.FLIGHT, vSITextureOff);
 
@@ -200,7 +200,7 @@ namespace VSIndicator
                 selD = VSI.GetColourCodeReversedD();
 
                 GameEvents.OnGameSettingsApplied.Add(TrialButton);
-                
+
 
                 if (!VSI.shouldHideButton)
                 {
@@ -254,12 +254,12 @@ namespace VSIndicator
 
                     else if (btnIsPresent)
                     {
-                       if (selA != storedA)
-                       {
+                        if (selA != storedA)
+                        {
                             SwitchChoice(0);
-                       }
+                        }
 
-                       if (selD != storedD)
+                        if (selD != storedD)
                         {
                             SwitchChoice(1);
                         }
@@ -303,7 +303,7 @@ namespace VSIndicator
                 btnIsPressed = true;
                 vSIBtn.SetTexture(vSITextureOn);
             }
-            
+
         }
 
         public void onFalse()

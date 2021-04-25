@@ -40,6 +40,6 @@ namespace VSIndicator
             return true;
         }
 
-    
+
     }
 }

@@ -64,8 +64,8 @@ namespace VSIndicator
                     return "White";
                 default:
                     return "Green (Stock)";
-        }
-            
+            }
+
 
         }
 

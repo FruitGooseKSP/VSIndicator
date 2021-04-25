@@ -76,7 +76,7 @@ namespace VSIndicator
             ColourDecoder cD = new ColourDecoder();
             codeName = cD.DecipherCode(colourCode);
             swatch = cD.GetColour(codeName);
-          
+
             if (type == 0)
             {
                 Instance.savedA = swatch;
@@ -166,7 +166,7 @@ namespace VSIndicator
 
             if (HighLogic.LoadedSceneIsFlight && !FlightGlobals.ActiveVessel.Landed && tM2.text == "Surface")
             {
-                double verticalSpeed = FlightGlobals.ActiveVessel.verticalSpeed;   
+                double verticalSpeed = FlightGlobals.ActiveVessel.verticalSpeed;
 
                 if (verticalSpeed < 0)              // if negative (ie falling)
                 {
@@ -186,7 +186,7 @@ namespace VSIndicator
             {
                 colourSet = false;
             }
-   
+
 
         }
 
