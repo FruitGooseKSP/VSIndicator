@@ -27,8 +27,8 @@ DETAILS
 -  Click the VSI toolbar button to bring up the menu. Here you can select the colour for ascending and for descending. The colour options
    are Green (stock), Red, Orange, Yellow, Cyan, Blue, Magenta, Pink and White.
 
--  If the navball is set to Surface, clicking through the ascending colour on the navball as a means of preview. Changing the 
-   colour will automatically save the selection
+-  If the navball is set to Surface, if you click through the ascending colours, the navball will update and this can 
+    be used as a means of preview. Changing the colour will automatically save the selection.
 
 -  If you're happy and no longer need to change the colour, you can disable the toolbar button by pressing 
     Escape -> Settings -> (your difficulty setting): Options -> Vertikal Speed Indicator -> Press the "Disable Toolbar Button" button. 
