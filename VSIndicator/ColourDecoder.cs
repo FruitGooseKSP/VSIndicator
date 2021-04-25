@@ -18,12 +18,13 @@ namespace VSIndicator
         private Color32 Pink;
         private Color32 White;
 
-
+        // main
         public ColourDecoder()
         {
             SetColours();
         }
 
+        // set colour values
         private void SetColours()
         {
             // colours as RGBA
@@ -38,6 +39,7 @@ namespace VSIndicator
 
         }
 
+        // returns colour name from number code
         public string DecipherCode(int code)
         {
             switch (code)
@@ -64,10 +66,6 @@ namespace VSIndicator
                     return "Green (Stock)";
         }
             
-
-
-
-
 
         }
 
@@ -100,6 +98,7 @@ namespace VSIndicator
 
         }
 
+        // returns the number code from the colour value
         public int GetReversedColour(string colour)
         {
             switch (colour)
@@ -129,16 +128,9 @@ namespace VSIndicator
                 default:
                     return 0;
             }
-                
-
-
-
 
 
         }
-
-
-
 
 
     }

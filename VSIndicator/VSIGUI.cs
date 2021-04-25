@@ -11,12 +11,14 @@ namespace VSIndicator
     [KSPAddon(KSPAddon.Startup.EveryScene, false)]
     public class VSIGUI : MonoBehaviour
     {
-
+        // toolbar button textures
         public Texture vSITextureOff;
         public Texture vSITextureOn;
 
+        //toolbar button
         public static ApplicationLauncherButton vSIBtn;
 
+        // has the button been pressed?
         public static bool btnIsPressed = false;
 
         // does the button exist?
@@ -28,7 +30,7 @@ namespace VSIndicator
         // menu close button
         public static bool closeBtn;
 
-        // menu position reference ie in the middle of the screen
+        // menu position reference ie in the middle of the screen & shifted up a little
         private Vector2 menuPR = new Vector2((Screen.width / 2) - 155, (Screen.height / 2) - 230);
 
         // menu size reference
@@ -37,17 +39,15 @@ namespace VSIndicator
         // the menu position holder
         private static Rect guiPos;
 
-        public static string currentDCol = "Red";
-        public static string currentACol = "Green (Stock)";
-
-        public static Color32 dCol = new Color32(255, 0, 0, 255);
-        public static Color32 aCol = Color.green;
-
+        // colour option references
         public static int selA;
         public static int selD;
+
+        // local stored colour option
         public int storedA = 1;
         public int storedD = 2;
 
+        // toggle button labels
         public static string[] cols =
         {
             "Green",
@@ -63,7 +63,7 @@ namespace VSIndicator
 
         
         
-
+        // launch the menu
 
         private static void ItsVSITime()
         {
@@ -90,41 +90,25 @@ namespace VSIndicator
         {
             // the menu
 
+            GUI.BeginGroup(new Rect(0,0, 310, 420));
 
-                  GUI.BeginGroup(new Rect(0,0, 310, 420));
+            GUI.Box(new Rect(0, 0, 310, 420), GUIContent.none);
 
+            GUI.Label(new Rect(40, 40, 140, 20), "Ascending", new GUIStyle(HighLogic.Skin.label));
+            GUI.Label(new Rect(200, 40, 140, 20), "Descending", new GUIStyle(HighLogic.Skin.label));
 
-                  GUI.Box(new Rect(0, 0, 310, 420), GUIContent.none);
+            selA = GUI.SelectionGrid(new Rect(20, 78, 150, 420), selA, cols, 1, new GUIStyle(HighLogic.Skin.toggle));
+            selD = GUI.SelectionGrid(new Rect(180, 78, 110, 420), selD, cols, 1, new GUIStyle(HighLogic.Skin.toggle));
 
+            closeBtn = GUI.Button(new Rect(110, 375, 100, 25), "Close", new GUIStyle(HighLogic.Skin.button));
 
-                  GUI.Label(new Rect(40, 40, 140, 20), "Ascending", new GUIStyle(HighLogic.Skin.label));
-                  GUI.Label(new Rect(200, 40, 140, 20), "Descending", new GUIStyle(HighLogic.Skin.label));
+            GUI.DragWindow();
 
-
-                  selA = GUI.SelectionGrid(new Rect(20, 78, 150, 420), selA, cols, 1, new GUIStyle(HighLogic.Skin.toggle));
-                  selD = GUI.SelectionGrid(new Rect(180, 78, 110, 420), selD, cols, 1, new GUIStyle(HighLogic.Skin.toggle));
-
-
-                  closeBtn = GUI.Button(new Rect(110, 375, 100, 25), "Close", new GUIStyle(HighLogic.Skin.button));
-
-
-
-
-
-                  GUI.DragWindow();
-
-
-
-                  GUI.EndGroup();
-
-                  
-
-
-
+            GUI.EndGroup();
 
         }
 
-
+        // misleading name, actual sends the chosen colour to the main class which then stores it
         public void PerformColourTest(int type)
         {
             int testColour;
@@ -147,7 +131,7 @@ namespace VSIndicator
 
         }
 
-
+        // tests if toolbar button should be displayed (ie according to option selection)
         public void TrialButton()
         {
             VSIOptions vSIOptions = HighLogic.CurrentGame.Parameters.CustomParams<VSIOptions>();
@@ -166,10 +150,7 @@ namespace VSIndicator
             else
             {
                 if (vSIBtn == null)
-                {
-
-                    
-
+                {             
                     vSIBtn = ApplicationLauncher.Instance.AddModApplication(onTrue, onFalse, onHover, onHoverOut, null, null,
                         ApplicationLauncher.AppScenes.FLIGHT, vSITextureOff);
 
@@ -180,6 +161,7 @@ namespace VSIndicator
 
         }
 
+        // colour switch handler
         public void SwitchChoice(int type)
         {
             if (type == 0)
@@ -194,16 +176,11 @@ namespace VSIndicator
                 PerformColourTest(1);
             }
 
-            
-
-
         }
 
 
         public void Start()
         {
-
-
             if (HighLogic.LoadedSceneIsFlight)
             {
                 instance = this;
@@ -287,17 +264,7 @@ namespace VSIndicator
                             SwitchChoice(1);
                         }
 
-
-                       
-
-
-
                     }
-
-
-
-
-
 
                 }
 
@@ -336,10 +303,6 @@ namespace VSIndicator
                 btnIsPressed = true;
                 vSIBtn.SetTexture(vSITextureOn);
             }
-
-
-           
-
             
         }
 
@@ -348,7 +311,6 @@ namespace VSIndicator
             // ie when clicked off
             if (btnIsPressed)
             {
-                //VSI.SetBaseColours(aCol, dCol);
                 vSIBtn.SetTexture(vSITextureOff);
                 btnIsPressed = false;
             }

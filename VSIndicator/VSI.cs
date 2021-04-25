@@ -12,8 +12,10 @@ namespace VSIndicator
     [KSPAddon(KSPAddon.Startup.Flight, false)]
     public class VSI : MonoBehaviour
     {
+        // quick reference and stored colours
+
         [KSPField(isPersistant = true)]
-        public Color32 savedA = Color.green;
+        public Color32 savedA = new Color32(0, 225, 0, 255);
 
         [KSPField(isPersistant = true)]
         public Color32 savedD = new Color32(255, 0, 0, 255);
@@ -32,18 +34,18 @@ namespace VSIndicator
         // bool to switch colour
         public bool colourSet = false;
 
+        // pause menu options reference
         public VSIOptions vSIOptions;
 
+        // indication of option selection
         public static bool shouldHideButton;
 
-        public bool testDone = true;
-        public bool weSwitched = false;
+        // this
         public static VSI Instance;
 
-        public Color32 aColour = Color.green;
-        public Color32 dColour = new Color32(255, 0, 0, 255);
 
 
+        // allows subclasses to check navball setting
         public static bool GetTM2Text()
         {
             if (Instance.tM2.text == "Surface")
@@ -53,9 +55,10 @@ namespace VSIndicator
             else return false;
         }
 
+
+        // gets the code from the colour
         public static int GetColourCodeReversedA()
         {
-            
             ColourDecoder cD = new ColourDecoder();
             return cD.GetReversedColour(Instance.vSIOptions.ascCol.ToString());
         }
@@ -65,26 +68,15 @@ namespace VSIndicator
             return cD.GetReversedColour(Instance.vSIOptions.desCol.ToString());
         }
 
+        // stores the selected colours
         public static void TestSwatch(int colourCode, int type)
         {
-            //Color32 current1 = Instance.tM.color;
-            //Color32 current2 = Instance.tM2.color;
             Color32 swatch;
             string codeName;
             ColourDecoder cD = new ColourDecoder();
             codeName = cD.DecipherCode(colourCode);
             swatch = cD.GetColour(codeName);
-
-            Instance.testDone = false;
-
-            Instance.tM.color = swatch;
-            Instance.tM2.color = swatch;
-           // Instance.tM2.text = codeName;
-            Instance.tM.ForceMeshUpdate();
-            Instance.tM2.ForceMeshUpdate();
-           
-           // StaticCoroutine.Start(Wait(2));
-
+          
             if (type == 0)
             {
                 Instance.savedA = swatch;
@@ -93,22 +85,10 @@ namespace VSIndicator
             {
                 Instance.savedD = swatch;
             }
-            Instance.testDone = true;
-
 
         }
 
-  /*      public static IEnumerator Wait(float seconds)
-        {
-            yield return new WaitForSeconds(seconds);
-            Instance.tM.color = Instance.savedA;
-            Instance.tM2.color = Instance.savedA;
-           // Instance.tM2.text = "Surface";
-            Instance.tM.ForceMeshUpdate();
-            Instance.tM2.ForceMeshUpdate();
-            
-        }
-  */
+
 
 
 
@@ -132,7 +112,9 @@ namespace VSIndicator
 
         public void Update()
         {
-            if (tM2.text != "Surface" && testDone)
+            // if not surface mode then set to stock green
+
+            if (tM2.text != "Surface")
             {
                 if (tM.color != stockGreen)
                 {
@@ -145,7 +127,9 @@ namespace VSIndicator
             }
             else
             {
-                if (!colourSet && testDone)
+                // ascending colour handler
+
+                if (!colourSet)
                 {
                     if (tM.color != savedA)
                     {
@@ -158,8 +142,10 @@ namespace VSIndicator
                     }
 
                 }
-                else if (colourSet && testDone)
+                else if (colourSet)
                 {
+                    //descending colour handler
+
                     if (tM.color != savedD)
                     {
                         tM.color = savedD;
@@ -200,16 +186,9 @@ namespace VSIndicator
             {
                 colourSet = false;
             }
-
-            
-            
+   
 
         }
-
-
-
-
-
 
     }
 }

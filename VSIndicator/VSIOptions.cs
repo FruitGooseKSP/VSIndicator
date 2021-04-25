@@ -16,12 +16,15 @@ namespace VSIndicator
         public override int SectionOrder { get { return 1; } }
         public override bool HasPresets { get { return true; } }
 
+        // button to disable the toolbar button
         [GameParameters.CustomParameterUI("Disable Toolbar Button")]
         public bool disableButton = false;
 
+        // stores the preferred colour (not visible)
         [GameParameters.CustomParameterUI("Saved Ascending Colour")]
         public Color32 ascCol = Color.green;
 
+        // stores the preferred colour (not visible)
         [GameParameters.CustomParameterUI("Saved Descending Colour")]
         public Color32 desCol = Color.red;
 
