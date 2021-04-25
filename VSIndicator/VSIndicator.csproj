@@ -70,8 +70,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColourDecoder.cs" />
     <Compile Include="VSI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VSIGUI.cs" />
+    <Compile Include="VSIOptions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
