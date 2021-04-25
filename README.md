@@ -13,8 +13,8 @@ retrograde (as instructed in the tutorials), because the prograde/retrograde mar
 an event, the vessel can sometimes turn upside down and/or spin which a newer player (and some more experienced!) can 
 struggle to recover from.
 
-This mod attempts to address the above by changing the colour of the text to red (when descending) and green (standard) when 
-ascending. Therefore, with practice, it's possible to manually land without locking the SAS to the retrograde marker. 
+This mod attempts to address the above by changing the colour of the text, depending on whether the player is ascending or 
+descending. Therefore, with practice, it's possible to manually land without locking the SAS to the retrograde marker. 
 Additionally, this teaches the player fine throttle control as they get instant feedback on their adjustments whilst 
 attempting to (for example) hover.
 
@@ -24,8 +24,16 @@ DETAILS
   "Target Mode". Usually the game switches to "Surface Mode" as you are sub-orbital and slowing down but you can 
   of course manually change it by clicking on the speed.
   
--  In "Surface Mode" if your vessel is descending towards the ground, the text will turn red. If you are ascending, 
-  it will turn green (the standard setting).
+-  Click the VSI toolbar button to bring up the menu. Here you can select the colour for ascending and for descending. The colour options
+   are Green (stock), Red, Orange, Yellow, Cyan, Blue, Magenta, Pink and White.
+
+-  If the navball is set to Surface, clicking through the ascending colour on the navball as a means of preview. Changing the 
+   colour will automatically save the selection
+
+-  If you're happy and no longer need to change the colour, you can disable the toolbar button by pressing 
+    Escape -> Settings -> (your difficulty setting): Options -> Vertikal Speed Indicator -> Press the "Disable Toolbar Button" button. 
+    You can also see which colours have been saved here. To reactivate it, just uncheck the toggle. Changes are made once you apply or 
+    accept the changes on the pause menu.
   
 
 
