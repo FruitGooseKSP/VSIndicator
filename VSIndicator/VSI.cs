@@ -82,10 +82,16 @@ namespace VSIndicator
             if (type == 0)
             {
                 Instance.savedA = swatch;
+                var tempCol = cD.GetReversedColour(Instance.savedA.ToString());
+                Instance.vSIOptions.ascCol = cD.DecipherCode(tempCol);
+                
             }
             else if (type == 1)
             {
                 Instance.savedD = swatch;
+                var tempCol = cD.GetReversedColour(Instance.savedD.ToString());
+                Instance.vSIOptions.desCol = cD.DecipherCode(tempCol);
+                
             }
 
         }
@@ -106,8 +112,37 @@ namespace VSIndicator
                 vSIOptions = HighLogic.CurrentGame.Parameters.CustomParams<VSIOptions>();
                 shouldHideButton = vSIOptions.disableButton;
                 ColourDecoder cD = new ColourDecoder();
-                savedA = cD.GetColour(vSIOptions.ascCol);
-                savedD = cD.GetColour(vSIOptions.desCol);
+
+                try
+                {
+                    if (vSIOptions.ascCol == null)
+                    {
+                        savedA = cD.GetColour("Green");
+                        vSIOptions.ascCol = "Green";
+                    }
+                    else
+                    {
+                        savedA = cD.GetColour(vSIOptions.ascCol);
+                    }
+
+
+                    if (vSIOptions.desCol == null)
+                    {
+                        savedD = cD.GetColour("Red");
+                        vSIOptions.desCol = "Red";
+                    }
+
+                    else
+                    {
+                        savedD = cD.GetColour(vSIOptions.desCol);
+                    }
+                }
+
+                catch
+                {
+                    Debug.LogError("Vertikal Speed Indicator: Error with persistent colour application");
+                }
+                
 
             }
 
@@ -140,9 +175,7 @@ namespace VSIndicator
                         tM2.color = savedA;
                         tM.ForceMeshUpdate();
                         tM2.ForceMeshUpdate();
-                        ColourDecoder cD = new ColourDecoder();
-                        var tempCol = cD.GetReversedColour(savedA.ToString());
-                        vSIOptions.ascCol = cD.DecipherCode(tempCol);
+                        
 
                     }
 
@@ -157,9 +190,7 @@ namespace VSIndicator
                         tM2.color = savedD;
                         tM.ForceMeshUpdate();
                         tM2.ForceMeshUpdate();
-                        ColourDecoder cD = new ColourDecoder();
-                        var tempCol = cD.GetReversedColour(savedD.ToString());
-                        vSIOptions.desCol = cD.DecipherCode(tempCol);
+                        
                     }
                     else return;
 
