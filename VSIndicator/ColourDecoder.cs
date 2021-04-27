@@ -9,6 +9,7 @@ namespace VSIndicator
     public class ColourDecoder
     {
         // colours
+        private Color32 Green;
         private Color32 Red;
         private Color32 Orange;
         private Color32 Yellow;
@@ -28,6 +29,7 @@ namespace VSIndicator
         private void SetColours()
         {
             // colours as RGBA
+            Green = new Color32(0, 255, 0, 255);
             Red = new Color32(255, 0, 0, 255);
             Orange = new Color32(255, 128, 0, 255);
             Yellow = new Color32(255, 255, 0, 255);
@@ -45,7 +47,7 @@ namespace VSIndicator
             switch (code)
             {
                 case 0:
-                    return "Green (Stock)";
+                    return "Green";
                 case 1:
                     return "Red";
                 case 2:
@@ -63,7 +65,7 @@ namespace VSIndicator
                 case 8:
                     return "White";
                 default:
-                    return "Green (Stock)";
+                    return "Green";
             }
 
 
@@ -75,6 +77,8 @@ namespace VSIndicator
 
             switch (_color)
             {
+                case nameof(Green):
+                    return Green;
                 case nameof(Red):
                     return Red;
                 case nameof(Orange):
@@ -92,7 +96,7 @@ namespace VSIndicator
                 case nameof(White):
                     return White;
                 default:
-                    return Color.green;
+                    return Green;
             }
 
 
@@ -103,14 +107,11 @@ namespace VSIndicator
         {
             switch (colour)
             {
-                case "Color.red":
-                    return 1;
-                case "Color.green":
+                
+                case "RGBA(0, 255, 0, 255)":
                     return 0;
                 case "RGBA(255, 0, 0, 255)":
                     return 1;
-                case "RGBA(0, 255, 0, 255)":
-                    return 0;
                 case "RGBA(255, 128, 0, 255)":
                     return 2;
                 case "RGBA(255, 255, 0, 255)":

@@ -22,11 +22,11 @@ namespace VSIndicator
 
         // stores the preferred colour 
         [GameParameters.CustomParameterUI("Saved Ascending Colour")]
-        public string ascCol = "Green";
+        public string ascCol;
 
         // stores the preferred colour 
         [GameParameters.CustomParameterUI("Saved Descending Colour")]
-        public string desCol = "Red";
+        public string desCol;
 
         public override void SetDifficultyPreset(GameParameters.Preset preset)
         {
