@@ -31,13 +31,13 @@ namespace VSIndicator
         public static bool closeBtn;
 
         // menu position reference ie in the middle of the screen & shifted up a little
-        private Vector2 menuPR = new Vector2((Screen.width / 2) - 155, (Screen.height / 2) - 230);
+        public static Vector2 menuPR = new Vector2((Screen.width / 2) - 155, (Screen.height / 2) - 230);
 
         // menu size reference
-        private Vector2 menuSR = new Vector2(310, 420);
+        public static Vector2 menuSR = new Vector2(310, 420);
 
         // the menu position holder
-        private static Rect guiPos;
+        public static Rect guiPos;
 
         // colour option references
         public static int selA;
@@ -90,22 +90,46 @@ namespace VSIndicator
         {
             // the menu
 
-            GUI.BeginGroup(new Rect(0, 0, 310, 420));
+            GUI.BeginGroup(new Rect(0, 0, menuSR.x, menuSR.y));
+            GUI.Box(new Rect(0, 0, menuSR.x, menuSR.y), GUIContent.none);
 
-            GUI.Box(new Rect(0, 0, 310, 420), GUIContent.none);
+            GUI.Label(new Rect(25, 50, menuSR.x / 4 - 25, 25), "Colour");
+            GUI.Label(new Rect((menuSR.x / 4) + 25, 50, menuSR.x / 4 - 25, 25), "Ascending");
+            GUI.Label(new Rect((menuSR.x / 4) * 2 + 50, 25, menuSR.x / 4 - 25, 25), "Descending");
+            GUI.Label(new Rect((menuSR.x / 4) * 3 + 50, 25, menuSR.x / 4 - 25, 25), "Safe Velocity");
 
-            GUI.Label(new Rect(40, 40, 140, 20), "Ascending", new GUIStyle(HighLogic.Skin.label));
-            GUI.Label(new Rect(200, 40, 140, 20), "Descending", new GUIStyle(HighLogic.Skin.label));
-
-            selA = GUI.SelectionGrid(new Rect(20, 78, 150, 420), selA, cols, 1, new GUIStyle(HighLogic.Skin.toggle));
-            selD = GUI.SelectionGrid(new Rect(180, 78, 110, 420), selD, cols, 1, new GUIStyle(HighLogic.Skin.toggle));
-
-            closeBtn = GUI.Button(new Rect(110, 375, 100, 25), "Close", new GUIStyle(HighLogic.Skin.button));
+            GUI.Label(new Rect(25, 75, menuSR.x / 4 - 25, 25), cols[0]);
+            GUI.Label(new Rect(25, 100, menuSR.x / 4 - 25, 25), cols[1]);
+            GUI.Label(new Rect(25, 125, menuSR.x / 4 - 25, 25), cols[2]);
+            GUI.Label(new Rect(25, 150, menuSR.x / 4 - 25, 25), cols[3]);
+            GUI.Label(new Rect(25, 175, menuSR.x / 4 - 25, 25), cols[4]);
+            GUI.Label(new Rect(25, 200, menuSR.x / 4 - 25, 25), cols[5]);
+            GUI.Label(new Rect(25, 225, menuSR.x / 4 - 25, 25), cols[6]);
+            GUI.Label(new Rect(25, 250, menuSR.x / 4 - 25, 25), cols[7]);
+            GUI.Label(new Rect(25, 275, menuSR.x / 4 - 25, 25), cols[8]);
 
             GUI.DragWindow();
 
             GUI.EndGroup();
 
+
+
+            /*   GUI.BeginGroup(new Rect(0, 0, 310, 420));
+
+               GUI.Box(new Rect(0, 0, 310, 420), GUIContent.none);
+
+               GUI.Label(new Rect(40, 40, 140, 20), "Ascending", new GUIStyle(HighLogic.Skin.label));
+               GUI.Label(new Rect(200, 40, 140, 20), "Descending", new GUIStyle(HighLogic.Skin.label));
+
+               selA = GUI.SelectionGrid(new Rect(20, 78, 150, 420), selA, cols, 1, new GUIStyle(HighLogic.Skin.toggle));
+               selD = GUI.SelectionGrid(new Rect(180, 78, 110, 420), selD, cols, 1, new GUIStyle(HighLogic.Skin.toggle));
+
+               closeBtn = GUI.Button(new Rect(110, 375, 100, 25), "Close", new GUIStyle(HighLogic.Skin.button));
+
+               GUI.DragWindow();
+
+               GUI.EndGroup();
+            */
         }
 
         // misleading name, actual sends the chosen colour to the main class which then stores it
