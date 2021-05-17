@@ -1,3 +1,9 @@
+v1.2.0
+
+- added option to specify a "safe" velocity and assign an alternative colour for reference
+- redesigned menu to incorporate the new features
+
+
 v1.1.1
 
 - fixed bug/issue of selected colours not being saved consistently when used with some other mods 
