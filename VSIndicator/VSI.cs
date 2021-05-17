@@ -20,6 +20,9 @@ namespace VSIndicator
         [KSPField(isPersistant = true)]
         public Color32 savedD = new Color32(255, 0, 0, 255);
 
+        [KSPField(isPersistant = true)]
+        public Color32 savedS = new Color32(0, 225, 0, 225);
+
         public Color32 stockGreen = new Color32(0, 255, 0, 255);
 
         // The speed display component on the navball
@@ -33,6 +36,9 @@ namespace VSIndicator
 
         // bool to switch colour
         public bool colourSet = false;
+
+        // bool to switch safe colour
+        public bool safeColourSet = false;
 
         // pause menu options reference
         public VSIOptions vSIOptions;
@@ -70,6 +76,13 @@ namespace VSIndicator
             return cD.GetReversedColour(tempCol.ToString());
         }
 
+        public static int GetColourCodeReveredS()
+        {
+            ColourDecoder cD = new ColourDecoder();
+            Color32 tempCol = cD.GetColour(Instance.vSIOptions.safCol);
+            return cD.GetReversedColour(tempCol.ToString());
+        }
+
         // stores the selected colours
         public static void TestSwatch(int colourCode, int type)
         {
@@ -92,6 +105,12 @@ namespace VSIndicator
                 var tempCol = cD.GetReversedColour(Instance.savedD.ToString());
                 Instance.vSIOptions.desCol = cD.DecipherCode(tempCol);
                 
+            }
+            else if (type == 2)
+            {
+                Instance.savedS = swatch;
+                var tempCol = cD.GetReversedColour(Instance.savedS.ToString());
+                Instance.vSIOptions.safCol = cD.DecipherCode(tempCol);
             }
 
         }
@@ -135,6 +154,12 @@ namespace VSIndicator
                     else
                     {
                         savedD = cD.GetColour(vSIOptions.desCol);
+                    }
+
+                    if (vSIOptions.safCol == null)
+                    {
+                        savedS = cD.GetColour("Green");
+                        vSIOptions.safCol = "Green";
                     }
                 }
 
@@ -184,15 +209,33 @@ namespace VSIndicator
                 {
                     //descending colour handler
 
-                    if (tM.color != savedD)
+                    // safe speed
+                    if (!safeColourSet)
                     {
-                        tM.color = savedD;
-                        tM2.color = savedD;
-                        tM.ForceMeshUpdate();
-                        tM2.ForceMeshUpdate();
-                        
+
+                        if (tM.color != savedD)
+                        {
+                            tM.color = savedD;
+                            tM2.color = savedD;
+                            tM.ForceMeshUpdate();
+                            tM2.ForceMeshUpdate();
+
+                        }
+                        else return;
                     }
-                    else return;
+
+                    // exceeded safe speed
+                    else
+                    {
+                        if (tM.color != savedS)
+                        {
+                            tM.color = savedS;
+                            tM2.color = savedS;
+                            tM.ForceMeshUpdate();
+                            tM2.ForceMeshUpdate();
+                        }
+                        else return;
+                    }
 
                 }
             }
@@ -205,10 +248,14 @@ namespace VSIndicator
             if (HighLogic.LoadedSceneIsFlight && !FlightGlobals.ActiveVessel.Landed && tM2.text == "Surface")
             {
                 double verticalSpeed = FlightGlobals.ActiveVessel.verticalSpeed;
+                double safeSpeed = double.Parse(VSIGUI.selV.ToString()) * -1;
 
                 if (verticalSpeed < 0)              // if negative (ie falling)
                 {
                     colourSet = true;
+
+                    safeColourSet = verticalSpeed >= safeSpeed ? true : false;
+
                 }
 
                 else
