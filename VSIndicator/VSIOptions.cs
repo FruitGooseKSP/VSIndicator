@@ -28,6 +28,10 @@ namespace VSIndicator
         [GameParameters.CustomParameterUI("Saved Descending Colour")]
         public string desCol;
 
+        // stores the preferred colour 
+        [GameParameters.CustomParameterUI("Saved Safe Velocity Colour")]
+        public string safCol;
+
         public override void SetDifficultyPreset(GameParameters.Preset preset)
         {
         }
