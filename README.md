@@ -14,7 +14,8 @@ an event, the vessel can sometimes turn upside down and/or spin which a newer pl
 struggle to recover from.
 
 This mod attempts to address the above by changing the colour of the text, depending on whether the player is ascending or 
-descending. Therefore, with practice, it's possible to manually land without locking the SAS to the retrograde marker. 
+descending. There is also an option to set an alternative colour and "safe velocity" for fine tuning purposes. 
+Therefore, with practice, it's possible to manually land without locking the SAS to the retrograde marker. 
 Additionally, this teaches the player fine throttle control as they get instant feedback on their adjustments whilst 
 attempting to (for example) hover.
 
@@ -24,11 +25,11 @@ DETAILS
   "Target Mode". Usually the game switches to "Surface Mode" as you are sub-orbital and slowing down but you can 
   of course manually change it by clicking on the speed.
   
--  Click the VSI toolbar button to bring up the menu. Here you can select the colour for ascending and for descending. The colour options
-   are Green (stock), Red, Orange, Yellow, Cyan, Blue, Magenta, Pink and White.
-
--  If the navball is set to Surface, if you click through the ascending colours, the navball will update and this can 
-    be used as a means of preview. Changing the colour will automatically save the selection.
+-  Click the VSI toolbar button to bring up the menu. Here you can select the colour for ascending, descending and safe velocity 
+   by moving the sliders. The colour options are Green (stock), Red, Orange, Yellow, Cyan, Blue, Magenta, Pink and White.
+   
+-  The last slider allows you to select which velocity is classed as the threshold for "safe", with ranges from 0 - 20 m/s in line 
+   with the stock navball velocity reading.
 
 -  If you're happy and no longer need to change the colour, you can disable the toolbar button by pressing 
     Escape -> Settings -> (your difficulty setting): Options -> Vertikal Speed Indicator -> Press the "Disable Toolbar Button" button. 
